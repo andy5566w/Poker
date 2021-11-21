@@ -3,5 +3,5 @@
 </template>
 
 <script setup>
-import style from "./sideBar.module.scss";
+import style from "./SideBar.module.scss";
 </script>
