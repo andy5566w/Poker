@@ -10,11 +10,11 @@ import SideBar from "./views/SideBar.vue";
   <Layout />
 </template>
 
-
 <style>
 :root {
   --header-heigh: 4rem;
   --layout-heigh: calc(100vh - var(--header-heigh));
+  --primary-color: #74b3ff;
 }
 * {
   margin: 0;
