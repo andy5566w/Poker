@@ -7,7 +7,14 @@ import SideBar from "./views/SideBar.vue";
 <template>
   <Header />
   <SideBar />
-  <Layout />
+  <Suspense>
+    <template #default>
+      <Layout />
+    </template>
+    <template #fallback>
+      <span><ion-icon name="reload-outline"></ion-icon></span>
+    </template>
+  </Suspense>
 </template>
 
 <style>
