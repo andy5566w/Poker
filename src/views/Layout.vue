@@ -7,7 +7,6 @@ import style from "./Layout.module.scss";
 import { getDocument } from "../js/index";
 export default {
   async setup() {
-    console.log(import.meta.env);
     const data = await getDocument("cities", "BJ");
     console.log(data.data());
 
