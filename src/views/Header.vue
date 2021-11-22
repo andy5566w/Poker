@@ -1,5 +1,8 @@
 <template>
-  <header :class="style.header">header</header>
+  <header :class="style.header">
+    <ion-icon :class="style.icon" name="caret-forward-outline"></ion-icon>
+    <button>Invite Friends</button>
+  </header>
 </template>
 
 <script setup>
