@@ -1,5 +1,4 @@
 <script setup>
-import Layout from "./views/Layout.vue";
 import Header from "./views/Header.vue";
 import SideBar from "./views/SideBar.vue";
 </script>
@@ -9,7 +8,7 @@ import SideBar from "./views/SideBar.vue";
   <SideBar />
   <Suspense>
     <template #default>
-      <Layout />
+      <router-view />
     </template>
     <template #fallback>
       <span><ion-icon name="reload-outline"></ion-icon></span>

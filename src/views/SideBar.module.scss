@@ -1,3 +1,8 @@
+@import '../scss/abstracts/mixin';
 .sideBar{
     position: absolute;
+    background-color: red;
+    @include absCenter;
+    height: 50rem;
+    width: 10rem;
 }
