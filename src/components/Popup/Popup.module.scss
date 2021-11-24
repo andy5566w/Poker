@@ -1,0 +1,24 @@
+@import '../../scss/abstracts/mixin';
+.container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    height: 100vh;
+  
+    @include flexCenter;
+
+
+    .closeIcon{
+      font-size: 2rem;
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      cursor: pointer;
+      transition: all .2s ease-in;
+
+      &:hover{
+        color:red;
+      }
+    }
+  }

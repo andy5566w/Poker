@@ -16,8 +16,12 @@ import SideBar from "./views/SideBar.vue";
   </Suspense>
 </template>
 
-<style>
+<style lang="scss">
 #app {
   min-height: 100vh;
+  overflow: hidden;
+  &.blur {
+    filter: blur(20px);
+  }
 }
 </style>
