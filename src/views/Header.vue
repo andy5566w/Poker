@@ -7,12 +7,12 @@
   </header>
 
   <teleport to="#popup" v-if="isPopup">
-    <Popup v-model="isPopup" />
+    <SignUp v-model="isPopup" />
   </teleport>
 </template>
 
 <script setup>
-import Popup from "../components/Popup/Popup.vue";
+import SignUp from "../components/Popup/signup/SignUp.vue";
 import { ref } from "@vue/reactivity";
 import style from "./Header.module.scss";
 const isPopup = ref(false);
