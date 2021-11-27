@@ -7,8 +7,15 @@
       <div class="columns">
         <div class="column">
           <div class="label">請輸入email</div>
-          <input type="text" class="input" v-model="email" />
+          <input type="email" class="input" v-model="email" />
           <div v-if="isEmailValid" :class="style.error">信箱格式錯誤</div>
+        </div>
+      </div>
+
+      <div class="columns">
+        <div class="column">
+          <div class="label">請輸入玩家名稱</div>
+          <input type="text" class="input" v-model="name" />
         </div>
       </div>
 
@@ -49,6 +56,7 @@ import {
   defineEmits,
 } from "@vue/runtime-core";
 import { ref, computed } from "@vue/reactivity";
+import useFirebase from "../../js/useFirebase";
 const app = document.querySelector("#app");
 
 const props = defineProps({
@@ -58,8 +66,10 @@ const props = defineProps({
 const emit = defineEmits(["update:modelValue"]);
 
 const email = ref("");
+const name = ref("player");
 const password = ref("");
 const secondPassword = ref("");
+const { addDocument } = useFirebase();
 
 const handleClick = () => {
   emit("update:modelValue", false);
@@ -88,7 +98,10 @@ const handleSignUp = async () => {
         text: `Something shit happen`,
       });
     }
-    console.log(result);
+    await addDocument("users", result.data.email, {
+      email: result.data.email,
+      name: name.value,
+    });
   } catch (err) {
     Swal.fire({
       icon: "error",

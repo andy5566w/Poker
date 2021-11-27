@@ -15,15 +15,12 @@
 
 <script>
 import style from "./Layout.module.scss";
-import { getDocument } from "../js/index";
 import Popup from "../components/Popup/Popup.vue";
 import { ref } from "@vue/reactivity";
 export default {
   components: { Popup },
   async setup() {
     const isPopup = ref(false);
-    // const data = await getDocument("cities", "BJ");
-    // console.log(data.data());
     return { style, isPopup };
   },
 };
