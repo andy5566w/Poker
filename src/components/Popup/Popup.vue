@@ -1,6 +1,6 @@
 <template>
   <div :class="style.container">
-    <span @click="handleClick" :class="style.closeIcon">
+    <span @click="handleClose" :class="style.closeIcon">
       <ion-icon name="close-circle-outline"></ion-icon>
     </span>
     <div class="container bg-gray-500 p-5 rounded-lg">
@@ -71,7 +71,7 @@ const password = ref("");
 const secondPassword = ref("");
 const { addDocument } = useFirebase();
 
-const handleClick = () => {
+const handleClose = () => {
   emit("update:modelValue", false);
 };
 
@@ -91,6 +91,7 @@ const handleSignUp = async () => {
         showConfirmButton: false,
         timer: 1500,
       });
+      handleClose();
     } else {
       Swal.fire({
         icon: "error",

@@ -1,5 +1,6 @@
 @import '../scss/abstracts/mixin';
 .sideBar{
+    opacity: 0;
     position: absolute;
     background-color: red;
     @include absCenter;
