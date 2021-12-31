@@ -1,12 +1,10 @@
 <script setup>
 import Header from "./views/Header.vue";
 import SideBar from "./views/SideBar.vue";
-import CountDown from "./components/CountDown/CountDown.vue";
 </script>
 
 <template>
   <Header />
-  <CountDown :time="5000" :isMillionSecond="true" />
   <SideBar />
   <Suspense>
     <template #default>
