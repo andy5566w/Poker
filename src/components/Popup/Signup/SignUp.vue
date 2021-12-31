@@ -33,9 +33,7 @@
 
       <div class="columns">
         <div class="column">
-          <button @click="handleSignUp" class="button is-primary is-pulled">
-            Submit
-          </button>
+          <button @click="handleSignUp" class="button is-primary is-pulled">Submit</button>
         </div>
       </div>
     </div>
@@ -43,19 +41,19 @@
 </template>
 
 <script setup>
-import style from "../Popup.module.scss";
-import Popup from "../Popup.vue";
-import Swal from "sweetalert2";
-import axios from "axios";
-import useFirebase from "../../../js/useFirebase";
-import { ref, computed } from "@vue/reactivity";
+import style from '../Popup.module.scss'
+import Popup from '../Popup.vue'
+import Swal from 'sweetalert2'
+import axios from 'axios'
+import useFirebase from '../../../js/useFirebase'
+import { ref, computed } from '@vue/reactivity'
 
-const email = ref("");
-const name = ref("player");
-const password = ref("");
-const secondPassword = ref("");
-const { addDocument } = useFirebase();
-const popupRef = ref(null);
+const email = ref('')
+const name = ref('player')
+const password = ref('')
+const secondPassword = ref('')
+const { addDocument } = useFirebase()
+const popupRef = ref(null)
 
 const handleSignUp = async () => {
   try {
@@ -64,46 +62,46 @@ const handleSignUp = async () => {
         import.meta.env.VITE_apiKey
       }`,
       { email: email.value, password: password.value, returnSecureToken: true }
-    );
+    )
     if (result.status === 200) {
       Swal.fire({
-        position: "top-end",
-        icon: "success",
-        title: "Welcome~~",
+        position: 'top-end',
+        icon: 'success',
+        title: 'Welcome~~',
         showConfirmButton: false,
-        timer: 1500,
-      });
-      await addDocument("users", result.data.email, {
+        timer: 1500
+      })
+      await addDocument('users', result.data.email, {
         email: result.data.email,
-        name: name.value,
-      });
-      console.log(popupRef.value);
+        name: name.value
+      })
+      console.log(popupRef.value)
     } else {
       Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: `Something shit happen`,
-      });
+        icon: 'error',
+        title: 'Oops...',
+        text: `Something shit happen`
+      })
     }
   } catch (err) {
     Swal.fire({
-      icon: "error",
-      title: "Oops...",
-      text: `${err.response.data.error.message}，please try again!`,
-    });
+      icon: 'error',
+      title: 'Oops...',
+      text: `${err.response.data.error.message}，please try again!`
+    })
   }
-};
+}
 
 const isPasswordCorrespond = computed(() => {
-  if (secondPassword.value === "" && password.value === "") return false;
-  return secondPassword.value !== password.value;
-});
+  if (secondPassword.value === '' && password.value === '') return false
+  return secondPassword.value !== password.value
+})
 const isEmailValid = computed(() => {
-  if (email.value === "") return false;
+  if (email.value === '') return false
   return !email.value.match(
     /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-  );
-});
+  )
+})
 </script>
 
 <style lang="scss" scoped>
