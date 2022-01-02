@@ -1,6 +1,6 @@
 import db from './firebase'
 import { doc, getDoc, setDoc, Timestamp } from 'firebase/firestore'
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
+import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth'
 import store from '../store/index'
 
 const getDocument = async (collection, docId) => {
@@ -33,8 +33,22 @@ const firebaseSignIn = async (email, password) => {
   }
 }
 
+const checkUserState = async (fn, args = []) => {
+  const auth = await getAuth()
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      console.log('success: ', user)
+      if (typeof fn === "function") {
+        fn.apply(this, args)
+      }
+    } else {
+      console.error('there is no user and authentication failed!')
+    }
+  })
+}
+
 const useFirebase = () => {
-  return { getDocument, addDocument, firebaseSignIn }
+  return { getDocument, addDocument, firebaseSignIn, checkUserState }
 }
 
 export default useFirebase
