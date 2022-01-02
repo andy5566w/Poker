@@ -41,7 +41,7 @@ const {firebaseSignIn} = useFirebase()
 
 const handleSignUp = () => {
   if (email.value && password.value) {
-    firebaseSignIn(email,password)
+    firebaseSignIn(email.value, password.value)
   }
 }
 
