@@ -1,6 +1,7 @@
 import db from './firebase'
 import { doc, getDoc, setDoc, Timestamp } from 'firebase/firestore'
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
+import store from '../store/index'
 
 const getDocument = async (collection, docId) => {
   const docRef = doc(db, collection, docId)
@@ -25,7 +26,7 @@ const firebaseSignIn = async (email, password) => {
     const userCredential = await signInWithEmailAndPassword(auth, email, password)
     if (userCredential) {
       const user = userCredential.user
-      console.log(user);
+      await store.dispatch("user/storeUser", user)
     }
   } catch (e) {
     console.log(e);

@@ -4,4 +4,5 @@ import './index.css'
 import './scss/main.scss'
 import router from './router'
 import 'sweetalert2/src/sweetalert2.scss'
-createApp(App).use(router).mount('#app')
+import store from "./store";
+createApp(App).use(store).use(router).mount('#app')

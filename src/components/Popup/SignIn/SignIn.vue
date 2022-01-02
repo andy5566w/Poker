@@ -32,16 +32,17 @@ import Popup from "../Popup.vue";
 import { ref } from 'vue'
 import { computed } from "@vue/reactivity";
 import useFirebase from '../../../js/useFirebase'
+import { useStore } from 'vuex'
 
 const password = ref('')
 const email = ref('')
-const {firebaseSignIn} = useFirebase()
+const { firebaseSignIn } = useFirebase()
+const store = useStore()
 
-
-
-const handleSignUp = () => {
+const handleSignUp =async () => {
   if (email.value && password.value) {
-    firebaseSignIn(email.value, password.value)
+    await firebaseSignIn(email.value, password.value)
+    console.log(store);
   }
 }
 
