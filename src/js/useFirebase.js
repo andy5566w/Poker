@@ -1,7 +1,8 @@
 import db from './firebase'
 import { doc, getDoc, setDoc, Timestamp } from 'firebase/firestore'
-import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth'
+import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from 'firebase/auth'
 import store from '../store/index'
+const auth = getAuth()
 
 const getDocument = async (collection, docId) => {
   const docRef = doc(db, collection, docId)
@@ -22,7 +23,6 @@ const addDocument = async (collection, docId, payload = {}) => {
 
 const firebaseSignIn = async (email, password) => {
   try {
-    const auth = getAuth()
     const userCredential = await signInWithEmailAndPassword(auth, email, password)
     if (userCredential) {
       const user = userCredential.user
@@ -34,7 +34,6 @@ const firebaseSignIn = async (email, password) => {
 }
 
 const checkUserState = async (fn, args = []) => {
-  const auth = await getAuth()
   onAuthStateChanged(auth, (user) => {
     if (user) {
       console.log('success: ', user)
@@ -47,8 +46,13 @@ const checkUserState = async (fn, args = []) => {
   })
 }
 
+const logoutUser = async () => {
+  await signOut(auth)
+  alert('you are logout')
+}
+
 const useFirebase = () => {
-  return { getDocument, addDocument, firebaseSignIn, checkUserState }
+  return {getDocument, addDocument, firebaseSignIn, checkUserState, logoutUser}
 }
 
 export default useFirebase
