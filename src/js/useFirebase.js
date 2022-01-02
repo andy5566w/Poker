@@ -1,5 +1,6 @@
 import db from './firebase'
 import { doc, getDoc, setDoc, Timestamp } from 'firebase/firestore'
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
 
 const getDocument = async (collection, docId) => {
   const docRef = doc(db, collection, docId)
@@ -18,8 +19,21 @@ const addDocument = async (collection, docId, payload = {}) => {
   })
 }
 
+const firebaseSignIn = async (email, password) => {
+  try {
+    const auth = getAuth()
+    const userCredential = await signInWithEmailAndPassword(auth, email, password)
+    if (userCredential) {
+      const user = userCredential.user
+      console.log(user);
+    }
+  } catch (e) {
+    console.log(e);
+  }
+}
+
 const useFirebase = () => {
-  return { getDocument, addDocument }
+  return { getDocument, addDocument, firebaseSignIn }
 }
 
 export default useFirebase
